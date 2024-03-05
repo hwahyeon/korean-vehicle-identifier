@@ -28,24 +28,24 @@ console.log(vehicle.vehicleInfo("123가4567")); //{vehicleType: '승용차', usa
 
 ### 보통 차량
 ```javascript
-console.log(vehicle.vehicleInfo("123가4567"));    //{vehicleType: '승용차', usage: '개인용 / 비사업용'}
-console.log(vehicle.vehicleInfo("02허1234"));     //{vehicleType: '승용차', usage: '대여용'}
-console.log(vehicle.vehicleInfo("79보1234"));     //{vehicleType: '승합차', usage: '개인용 / 비사업용'}
-console.log(vehicle.vehicleInfo("80배1234"));     //{vehicleType: '화물차', usage: '택배용'}
+vehicle.vehicleInfo("123가4567");    //{vehicleType: '승용차', usage: '개인용 / 비사업용'}
+vehicle.vehicleInfo("02허1234");     //{vehicleType: '승용차', usage: '대여용'}
+vehicle.vehicleInfo("79보1234");     //{vehicleType: '승합차', usage: '개인용 / 비사업용'}
+vehicle.vehicleInfo("80배1234");     //{vehicleType: '화물차', usage: '택배용'}
 ```
 
 ### 건설 기계
 ```javascript
-console.log(vehicle.vehicleInfo("012가5006"));     //{vehicleType: '콘크리트 피니셔', usage: '자가용'}
-console.log(vehicle.vehicleInfo("026거1234"));     //{vehicleType: '도로보수트럭', usage: '자가용'}
-console.log(vehicle.vehicleInfo("026러5234"));     //{vehicleType: '콘크리트믹서트레일러', usage: '자가용'}
+vehicle.vehicleInfo("012가5006");     //{vehicleType: '콘크리트 피니셔', usage: '자가용'}
+vehicle.vehicleInfo("026거1234");     //{vehicleType: '도로보수트럭', usage: '자가용'}
+vehicle.vehicleInfo("026러5234");     //{vehicleType: '콘크리트믹서트레일러', usage: '자가용'}
 ```
 
 ### 특수 목적 차량
 ```javascript
-console.log(vehicle.vehicleInfo("12국 3456"));     //{vehicleType: '승용차', usage: '국방부 및 직할부대'}
-console.log(vehicle.vehicleInfo("외교 012-345"));  //{vehicleType: '알 수 없음', usage: '대사관'}
-console.log(vehicle.vehicleInfo("외빈 108"));      //{vehicleType: '알 수 없음', usage: '외빈'}
+vehicle.vehicleInfo("12국 3456");     //{vehicleType: '승용차', usage: '국방부 및 직할부대'}
+vehicle.vehicleInfo("외교 012-345");  //{vehicleType: '알 수 없음', usage: '대사관'}
+vehicle.vehicleInfo("외빈 108");      //{vehicleType: '알 수 없음', usage: '외빈'}
 ```
 
 ### 주의 사항
