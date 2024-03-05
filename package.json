@@ -1,6 +1,6 @@
 {
   "name": "kr-vehicle-identifier",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "한국의 차량 번호를 분석하여 차량의 유형과 목적을 식별하는 라이브러리",
   "main": "src/index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "vehicle",
     "license plate",
     "car number",
-    "Korean vehicle",
+    "korean vehicle",
     "vehicle",
     "korean",
     "차량 번호판"
