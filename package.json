@@ -1,0 +1,28 @@
+{
+  "name": "kr-vehicle-identifier",
+  "version": "1.0.0",
+  "description": "한국의 차량 번호를 분석하여 차량의 유형과 목적을 식별하는 라이브러리",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hwahyeon/korean-vehicle-identifier.git"
+  },
+  "keywords": [
+    "vehicle",
+    "license plate",
+    "car number",
+    "Korean vehicle",
+    "vehicle",
+    "korean",
+    "차량 번호판"
+  ],
+  "author": "hwahyeon <hwahyeon.dev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hwahyeon/korean-vehicle-identifier/issues"
+  },
+  "homepage": "https://github.com/hwahyeon/korean-vehicle-identifier#readme"
+}
