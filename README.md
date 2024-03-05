@@ -1,6 +1,8 @@
 # korean-vehicle-identifier
-
-한국의 차량 번호를 분석하여 차량의 유형(vehicleType)과 사용 목적(usage)을 식별하는 라이브러리입니다.
+*An English user manual is being prepared.*
+  
+- 한국의 차량 번호를 분석하여 차량의 유형과 사용 목적을 식별하는 라이브러리입니다.
+- A JavaScript library for analyzing Korean vehicle numbers to identify vehicle type and usage purpose.
 
 ## 설치
 
@@ -13,7 +15,7 @@ npm install kr-vehicle-identifier
 ```javascript
 const vehicle = require("kr-vehicle-identifier");
 
-console.log(vehicle.vehicleInfo("")); //
+console.log(vehicle.vehicleInfo("123가4567")); //{vehicleType: '승용차', usage: '개인용 / 비사업용'}
 ```
 
 OR
@@ -21,11 +23,36 @@ OR
 ```javascript
 import vehicle from "kr-vehicle-identifier";
 
-console.log(vehicle.vehicleInfo("")); //
+console.log(vehicle.vehicleInfo("123가4567")); //{vehicleType: '승용차', usage: '개인용 / 비사업용'}
 ```
 
+### 보통 차량
+```javascript
+console.log(vehicle.vehicleInfo("123가4567"));    //{vehicleType: '승용차', usage: '개인용 / 비사업용'}
+console.log(vehicle.vehicleInfo("02허1234"));     //{vehicleType: '승용차', usage: '대여용'}
+console.log(vehicle.vehicleInfo("79보1234"));     //{vehicleType: '승합차', usage: '개인용 / 비사업용'}
+console.log(vehicle.vehicleInfo("80배1234"));     //{vehicleType: '화물차', usage: '택배용'}
+```
+
+### 건설 기계
+```javascript
+console.log(vehicle.vehicleInfo("012가5006"));     //{vehicleType: '콘크리트 피니셔', usage: '자가용'}
+console.log(vehicle.vehicleInfo("026거1234"));     //{vehicleType: '도로보수트럭', usage: '자가용'}
+console.log(vehicle.vehicleInfo("026러5234"));     //{vehicleType: '콘크리트믹서트레일러', usage: '자가용'}
+```
+
+### 특수 목적 차량
+```javascript
+console.log(vehicle.vehicleInfo("12국 3456"));     //{vehicleType: '승용차', usage: '국방부 및 직할부대'}
+console.log(vehicle.vehicleInfo("외교 012-345"));  //{vehicleType: '알 수 없음', usage: '대사관'}
+console.log(vehicle.vehicleInfo("외빈 108"));      //{vehicleType: '알 수 없음', usage: '외빈'}
+```
 
 ### 주의 사항
+```javascript
+console.log(vehicle.vehicleInfo(""));             //{error: 'Invalid license plate format'}
+console.log(vehicle.vehicleInfo("ANN-0509"));     //{error: 'Invalid license plate format'}
+```
 - 입력된 차량 번호가 올바른 형식을 따르지 않는 경우, error 필드를 포함한 객체가 반환됩니다.
 - 이 API는 한국 차량 번호 형식에 최적화되어 있습니다. 다른 국가의 차량 번호를 분석하는 데 사용할 경우, 정확한 결과를 보장할 수 없습니다.
 
