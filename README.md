@@ -1,8 +1,7 @@
 # korean-vehicle-identifier
-*An English user manual is being prepared.*
-  
+
 - 한국의 차량 번호를 분석하여 차량의 유형과 사용 목적을 식별하는 라이브러리입니다.
-- A JavaScript library for analyzing Korean vehicle numbers to identify vehicle type and usage purpose.
+- A JavaScript library for analyzing Korean **license plates** to identify vehicle type and usage. [View README in English](./README.en.md)
 
 ## 설치
 
@@ -11,7 +10,7 @@ npm install kr-vehicle-identifier
 ```
 
 ## 사용 방법
-
+### CommonJS
 ```javascript
 const vehicle = require("kr-vehicle-identifier");
 
@@ -19,8 +18,7 @@ console.log(vehicle.vehicleInfo("123가4567"));
 //{vehicleType: '승용차', usage: '개인용 / 비사업용'}
 ```
 
-OR
-
+### ES Modules
 ```javascript
 import vehicle from "kr-vehicle-identifier";
 
@@ -29,37 +27,44 @@ console.log(vehicle.vehicleInfo("123가4567"));
 ```
 
 ### 보통 차량
+
 ```javascript
-vehicle.vehicleInfo("123가4567");   //{vehicleType: '승용차', usage: '개인용 / 비사업용'}
-vehicle.vehicleInfo("02허1234");    //{vehicleType: '승용차', usage: '대여용'}
-vehicle.vehicleInfo("79보1234");    //{vehicleType: '승합차', usage: '개인용 / 비사업용'}
-vehicle.vehicleInfo("80배1234");    //{vehicleType: '화물차', usage: '택배용'}
+vehicle.vehicleInfo("123가4567"); //{vehicleType: '승용차', usage: '개인용 / 비사업용'}
+vehicle.vehicleInfo("02허1234"); //{vehicleType: '승용차', usage: '대여용'}
+vehicle.vehicleInfo("79보1234"); //{vehicleType: '승합차', usage: '개인용 / 비사업용'}
+vehicle.vehicleInfo("80배1234"); //{vehicleType: '화물차', usage: '택배용'}
 ```
 
 ### 건설 기계
+
 ```javascript
-vehicle.vehicleInfo("012가5006");    //{vehicleType: '콘크리트 피니셔', usage: '자가용'}
-vehicle.vehicleInfo("026거1234");    //{vehicleType: '도로보수트럭', usage: '자가용'}
-vehicle.vehicleInfo("026러5234");    //{vehicleType: '콘크리트믹서트레일러', usage: '자가용'}
+vehicle.vehicleInfo("012가5006"); //{vehicleType: '콘크리트 피니셔', usage: '자가용'}
+vehicle.vehicleInfo("026거1234"); //{vehicleType: '도로보수트럭', usage: '자가용'}
+vehicle.vehicleInfo("026러5234"); //{vehicleType: '콘크리트믹서트레일러', usage: '자가용'}
 ```
 
 ### 특수 목적 차량
+
 ```javascript
-vehicle.vehicleInfo("12국 3456");    //{vehicleType: '승용차', usage: '국방부 및 직할부대'}
+vehicle.vehicleInfo("12국 3456"); //{vehicleType: '승용차', usage: '국방부 및 직할부대'}
 vehicle.vehicleInfo("외교 012-345"); //{vehicleType: '알 수 없음', usage: '대사관'}
-vehicle.vehicleInfo("외빈 108");     //{vehicleType: '알 수 없음', usage: '외빈'}
+vehicle.vehicleInfo("외빈 108"); //{vehicleType: '알 수 없음', usage: '외빈'}
 ```
 
 ### 주의 사항
+
 ```javascript
-vehicle.vehicleInfo("");            //{error: 'Invalid license plate format'}
-vehicle.vehicleInfo("ANN-0509");    //{error: 'Invalid license plate format'}
+vehicle.vehicleInfo(""); // { error: "Invalid license plate format. Expected formats: '12가3456' or '026거1234'" }
+vehicle.vehicleInfo("ANN-0509"); // { error: "Invalid license plate format. Expected formats: '12가3456' or '026거1234'" }
 ```
+
 - 입력된 차량 번호가 올바른 형식을 따르지 않는 경우, error 필드를 포함한 객체가 반환됩니다.
 - 이 API는 한국 차량 번호 형식에 최적화되어 있습니다. 다른 국가의 차량 번호를 분석하는 데 사용할 경우, 정확한 결과를 보장할 수 없습니다.
 
 ## API
+
 ### `vehicleInfo(licensePlate)`
+
 목적: 입력된 차량 번호로부터 차량의 유형과 사용 목적을 분석합니다.
 
 - **매개변수**
@@ -79,23 +84,23 @@ vehicle.vehicleInfo("ANN-0509");    //{error: 'Invalid license plate format'}
 한국의 차량 번호판은 대체로 "숫자-한글-숫자" 형식으로 구성되어 있으며, 간혹 "한글-숫자" 형식으로도 사용됩니다. 이 숫자와 한글 부분은 차량의 유형, 사용 목적 등의 다양한 정보를 담고 있습니다.
 
 - **번호판 앞자리 수**  
-    번호판에서 가장 먼저 나오는 숫자는 차종의 정보를 담고 있습니다.
+   번호판에서 가장 먼저 나오는 숫자는 차종의 정보를 담고 있습니다.
 
-| 기호    | 차량 유형  | 비고                                   |
-| ------- | ---------- | -------------------------------------- |
-| 01~69   | 승용차     |                                        |
-| 70~79   | 승합차     |                                        |
-| 80~97   | 화물차     |                                        |
-| 98~99   | 특수차     | 트랙터, 캠핑카, 경찰차, 소방차         |
-| 100~699 | 승용차     |                                        |
-| 700~799 | 승합차     |                                        |
-| 800~979 | 화물차     |                                        |
-| 980~997 | 특수차     |                                        |
-| 998~999 | 긴급자동차 |                                        |
-| 001~027 | 건설기계   | 세 자리 숫자이며 "0"으로 시작 |
+| 기호    | 차량 유형  | 비고                           |
+| ------- | ---------- | ------------------------------ |
+| 01~69   | 승용차     |                                |
+| 70~79   | 승합차     |                                |
+| 80~97   | 화물차     |                                |
+| 98~99   | 특수차     | 트랙터, 캠핑카, 경찰차, 소방차 |
+| 100~699 | 승용차     |                                |
+| 700~799 | 승합차     |                                |
+| 800~979 | 화물차     |                                |
+| 980~997 | 특수차     |                                |
+| 998~999 | 긴급자동차 |                                |
+| 001~027 | 건설기계   | 세 자리 숫자이며 "0"으로 시작  |
 
-- **문자**   
-    번호판의 문자는 자동차의 용도를 표현합니다.
+- **문자**  
+   번호판의 문자는 자동차의 용도를 표현합니다.
 
 | 기호 | 사용 목적 |
 |---------|-------------------------|
@@ -119,13 +124,13 @@ vehicle.vehicleInfo("ANN-0509");    //{error: 'Invalid license plate format'}
 | 협정 | 협정 |
 
 - **마지막 네 자리 수**  
-    마지막 네 자리 수는 임의의 일련번호이나, `건설기계`인 경우 아래의 표를 따릅니다.
+   마지막 네 자리 수는 임의의 일련번호이나, `건설기계`인 경우 아래의 표를 따릅니다.
 
-| 기호 | 사용 목적 |
-|---------------|-----------|
-| 0001 ~ 0999 | 관용 |
-| 1000 ~ 5999 | 자가용 |
-| 6000 ~ 9999 | 영업용 |
+| 기호        | 사용 목적 |
+| ----------- | --------- |
+| 0001 ~ 0999 | 관용      |
+| 1000 ~ 5999 | 자가용    |
+| 6000 ~ 9999 | 영업용    |
 
 - **건설기계**
 
@@ -159,7 +164,7 @@ vehicle.vehicleInfo("ANN-0509");    //{error: 'Invalid license plate format'}
 | 027  | 타워크레인          |
 
 - **특수건설기계**  
-    `특수건설기계(026)`인 경우, 번호판 문자로 더 자세한 용도를 알 수 있습니다.
+   `특수건설기계(026)`인 경우, 번호판 문자로 더 자세한 용도를 알 수 있습니다.
 
 | 기호 | 세부 유형              |
 | ---- | ---------------------- |
