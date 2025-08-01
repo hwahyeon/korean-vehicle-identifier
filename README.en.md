@@ -9,7 +9,7 @@ npm install kr-vehicle-identifier
 ```
 
 ## Usage
-
+### CommonJS
 ```javascript
 const vehicle = require("kr-vehicle-identifier");
 
@@ -17,8 +17,7 @@ console.log(vehicle.vehicleInfo("123가4567"));
 // { vehicleType: '승용차', usage: '개인용 / 비사업용' }
 ```
 
-OR
-
+### ES Modules
 ```javascript
 import vehicle from "kr-vehicle-identifier";
 
