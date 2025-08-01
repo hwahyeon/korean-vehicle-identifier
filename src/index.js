@@ -8,6 +8,14 @@ const PERSONAL_USAGE_CHARS = new Set([
   "부", "수", "우", "주",
 ]);
 
+/**
+ * 차량 번호판 문자열을 앞 숫자, 가운데 한글, 뒤 숫자로 분리합니다.
+ * 예: "12가3456" → { part1: "12", part2: "가", part3: "3456" }
+ *
+ * @param {string} input - 번호판 문자열 (공백, 특수문자 포함 가능)
+ * @returns {{ part1: string, part2: string, part3: string } | null}
+ *          유효한 번호판이면 각 부분을 나눠 반환하고, 그렇지 않으면 null 반환
+ */
 function splitLicensePlate(input) {
   const sanitizedInput = input.replace(/[^가-힣0-9]/g, "");
   const pattern = /^(\d+)?([가-힣]+)(\d+)?$/;
@@ -24,6 +32,12 @@ function splitLicensePlate(input) {
   }
 }
 
+/**
+ * 번호판의 한글 글자를 기반으로 차량 용도를 판별합니다.
+ *
+ * @param {string} kalphabet - 번호판 중간에 위치한 한글 글자 (예: "가", "허", "외교")
+ * @returns {string} 차량의 용도 (예: "개인용 / 비사업용", "영업용", "대여용", "알 수 없음")
+ */
 function analyzeLicensePlateUsage(kalphabet) {
   const usageMapping = {
     국: "국방부 및 직할부대",
@@ -61,6 +75,12 @@ function analyzeLicensePlateUsage(kalphabet) {
   return "알 수 없음";
 }
 
+/**
+ * 번호판의 앞 숫자(part1)를 기반으로 차량 종류를 판별합니다.
+ *
+ * @param {string} part1 - 번호판의 앞부분 숫자 문자열 (예: "12", "123", "026")
+ * @returns {string} 차량 종류 (예: "승용차", "화물차", "건설기계", "알 수 없음")
+ */
 function analyzeLicensePlateVehicleType(part1) {
   const part1Number = parseInt(part1, 10);
 
@@ -90,6 +110,13 @@ function analyzeLicensePlateVehicleType(part1) {
   return "알 수 없음";
 }
 
+/**
+ * 일반 차량(건설기계가 아닌)의 번호판 정보를 기반으로 차량 종류와 용도를 분석합니다.
+ *
+ * @param {string} part1 - 번호판 앞 숫자 (차량 종류 분석용)
+ * @param {string} part2 - 번호판 한글 (용도 분석용)
+ * @returns {{ vehicleType: string, usage: string }} 차량 정보
+ */
 function analyzeVehicle(part1, part2) {
   const vehicleTypeInfo = analyzeLicensePlateVehicleType(part1);
   const usage = analyzeLicensePlateUsage(part2);
@@ -100,6 +127,12 @@ function analyzeVehicle(part1, part2) {
   };
 }
 
+/**
+ * 건설기계 차량의 번호판 정보를 기반으로 기계 종류와 용도를 분석합니다.
+ *
+ * @param {{ part1: string, part2: string, part3: string }} parts - 번호판 세 부분
+ * @returns {{ vehicleType: string, usage: string }} 건설기계 정보
+ */
 function analyzeConstructionVehicle(parts) {
   const detailedMapping = {
     "001": "불도저",
@@ -167,6 +200,15 @@ function analyzeConstructionVehicle(parts) {
   };
 }
 
+/**
+ * 번호판 문자열을 파싱하여 형식을 확인하고, 건설기계 여부를 판별하여 차량 유형을 반환합니다.
+ *
+ * @param {string} licensePlate - 차량 번호판 문자열
+ * @returns {{
+ *   parts: { part1: string, part2: string, part3: string },
+ *   type: "건설기계" | "일반"
+ * } | { error: string }} 차량 번호판 정보 또는 오류
+ */
 function getLicensePlatePartsAndType(licensePlate) {
   const parts = splitLicensePlate(licensePlate);
 
@@ -185,6 +227,17 @@ function getLicensePlatePartsAndType(licensePlate) {
   };
 }
 
+/**
+ * 차량 번호판 전체 문자열을 분석하여 차량 종류와 용도 정보를 반환합니다.
+ *
+ * @param {string} licensePlate - 전체 차량 번호판 (예: "12가3456", "026거1234")
+ * @returns {{
+ *   vehicleType: string,
+ *   usage: string
+ * } | {
+ *   error: string
+ * }} 분석된 차량 정보 또는 오류 메시지
+ */
 function vehicleInfo(licensePlate) {
   const result = getLicensePlatePartsAndType(licensePlate);
   if ("error" in result) return result;
