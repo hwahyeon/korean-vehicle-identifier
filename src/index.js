@@ -172,7 +172,9 @@ function vehicleInfo(licensePlate) {
   const parts = splitLicensePlate(licensePlate);
 
   if (!parts) {
-    return { error: "Invalid license plate format" };
+    return {
+      error: "Invalid license plate format. Expected formats: '12가3456' or '026거1234'",
+    };
   }
 
   if (isConstructionVehicle(parts.part1)) {
