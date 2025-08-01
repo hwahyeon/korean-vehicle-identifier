@@ -24,7 +24,6 @@ function splitLicensePlate(input) {
   }
 }
 
-
 function analyzeLicensePlateUsage(kalphabet) {
   const usageMapping = {
     국: "국방부 및 직할부대",
@@ -173,7 +172,8 @@ function getLicensePlatePartsAndType(licensePlate) {
 
   if (!parts) {
     return {
-      error: "Invalid license plate format. Expected formats: '12가3456' or '026거1234'",
+      error:
+        "Invalid license plate format. Expected formats: '12가3456' or '026거1234'",
     };
   }
 
