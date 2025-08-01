@@ -2,6 +2,8 @@
 
 - A JavaScript library for analyzing Korean **license plates** to identify vehicle type and usage. [README in Korean](./README.md)
 
+[Try it Online](https://hwahyeon.github.io/korean-vehicle-identifier)
+
 ## Installation
 
 ```bash

@@ -3,6 +3,8 @@
 - 한국의 차량 번호를 분석하여 차량의 유형과 사용 목적을 식별하는 라이브러리입니다.
 - A JavaScript library for analyzing Korean **license plates** to identify vehicle type and usage. [View README in English](./README.en.md)
 
+[온라인에서 사용해보기](https://your-demo-link.com)
+
 ## 설치
 
 ```bash
