@@ -168,7 +168,7 @@ function analyzeConstructionVehicle(parts) {
   };
 }
 
-function vehicleInfo(licensePlate) {
+function getLicensePlatePartsAndType(licensePlate) {
   const parts = splitLicensePlate(licensePlate);
 
   if (!parts) {
@@ -177,12 +177,23 @@ function vehicleInfo(licensePlate) {
     };
   }
 
-  if (isConstructionVehicle(parts.part1)) {
-    // 건설기계
-    return analyzeConstructionVehicle(parts);
-  } else {
-    return analyzeVehicle(parts.part1, parts.part2);
-  }
+  const isConstruction = isConstructionVehicle(parts.part1);
+
+  return {
+    parts,
+    type: isConstruction ? "건설기계" : "일반",
+  };
+}
+
+function vehicleInfo(licensePlate) {
+  const result = getLicensePlatePartsAndType(licensePlate);
+  if ("error" in result) return result;
+
+  const { parts, type } = result;
+
+  return type === "건설기계"
+    ? analyzeConstructionVehicle(parts)
+    : analyzeVehicle(parts.part1, parts.part2);
 }
 
 module.exports = {
