@@ -1,3 +1,13 @@
+const PERSONAL_USAGE_CHARS = new Set([
+  "가", "나", "다", "라", "마",
+  "거", "너", "더", "러", "머",
+  "버", "서", "어", "저",
+  "고", "노", "도", "로", "모",
+  "보", "소", "오", "조",
+  "구", "누", "두", "루", "무",
+  "부", "수", "우", "주",
+]);
+
 function splitLicensePlate(input) {
   const sanitizedInput = input.replace(/[^가-힣0-9]/g, "");
   const pattern = /^(\d+)?([가-힣]+)(\d+)?$/;
@@ -14,12 +24,11 @@ function splitLicensePlate(input) {
   }
 }
 
-function analyzeLicensePlateUsage(kalphabet) {
-  let usage = "알 수 없음";
 
+function analyzeLicensePlateUsage(kalphabet) {
   const usageMapping = {
     국: "국방부 및 직할부대",
-    합: "합동참보본부 및 합동부대",
+    합: "합동참모본부 및 합동부대",
     육: "육군",
     해: "해군",
     공: "공군",
@@ -43,16 +52,14 @@ function analyzeLicensePlateUsage(kalphabet) {
   };
 
   if (usageMapping.hasOwnProperty(kalphabet)) {
-    usage = usageMapping[kalphabet];
-  } else {
-    const personalUsageChars =
-      "가나다라마거너더러머버서어저고노도로모보소오조구누두루무부수우주";
-    if (personalUsageChars.includes(kalphabet)) {
-      usage = "개인용 / 비사업용";
-    }
+    return usageMapping[kalphabet];
   }
 
-  return usage;
+  if (PERSONAL_USAGE_CHARS.has(kalphabet)) {
+    return "개인용 / 비사업용";
+  }
+
+  return "알 수 없음";
 }
 
 function analyzeLicensePlateVehicleType(part1) {
