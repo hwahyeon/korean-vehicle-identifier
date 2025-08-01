@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>한국 차량 번호판 분석기</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>한국 차량 번호판 분석기</h1>
+    <p class="description">
+      번호판을 입력하면 차량 종류와 용도를 분석하여 JSON 형식으로 보여줍니다.
+    </p>
+    <input
+      id="plate"
+      type="text"
+      placeholder="예: 123가4567"
+      autocomplete="off"
+      spellcheck="false"
+    />
+
+    <div class="code-label" aria-label="Output code block label">
+      Output
+    </div>
+    <pre id="result"><code>여기에 결과가 표시됩니다.</code></pre>
+
+    <div class="examples" role="region" aria-labelledby="example-title">
+      <strong id="example-title">테스트용 번호판 예시</strong>
+      <table class="examples-table" summary="테스트용 번호판 예시와 차량 설명">
+        <thead>
+          <tr>
+            <th>번호판</th>
+            <th>차량 종류 및 용도</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>12가3456</td>
+            <td>승용차, 개인용 / 비사업용</td>
+          </tr>
+          <tr>
+            <td>75나1234</td>
+            <td>승합차, 개인용 / 비사업용</td>
+          </tr>
+          <tr>
+            <td>88자9876</td>
+            <td>화물차, 영업용</td>
+          </tr>
+          <tr>
+            <td>026거1234</td>
+            <td>건설기계, 도로보수트럭</td>
+          </tr>
+          <tr>
+            <td>027더6789</td>
+            <td>건설기계, 노면측정장비</td>
+          </tr>
+          <tr>
+            <td>외교123</td>
+            <td>대사관 차량</td>
+          </tr>
+          <tr>
+            <td>육12가3456</td>
+            <td>육군 차량</td>
+          </tr>
+          <tr>
+            <td>026머1234</td>
+            <td>건설기계, 아스팔트콘크리트재생기</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="footer">
+      View on
+      <a href="https://github.com/hwahyeon/korean-vehicle-identifier" target="_blank"
+        >GitHub</a
+      >
+    </div>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
