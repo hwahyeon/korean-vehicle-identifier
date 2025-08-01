@@ -1,6 +1,6 @@
 {
   "name": "kr-vehicle-identifier",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Analyzes Korean vehicle license plates to determine type and usage.",
   "main": "src/index.js",
   "repository": {
