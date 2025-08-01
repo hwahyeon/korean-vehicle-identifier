@@ -33,6 +33,21 @@ function splitLicensePlate(input) {
 }
 
 /**
+ * 주어진 번호판 앞 숫자가 건설기계인지 여부를 판별합니다.
+ *
+ * @param {string} part1 - 번호판의 앞부분 숫자 문자열 (예: "026")
+ * @returns {boolean} 건설기계이면 true, 아니면 false
+ */
+function isConstructionVehicle(part1) {
+  return (
+    part1.startsWith("0") &&
+    part1.length === 3 &&
+    parseInt(part1, 10) >= 1 &&
+    parseInt(part1, 10) <= 27
+  );
+}
+
+/**
  * 번호판의 한글 글자를 기반으로 차량 용도를 판별합니다.
  *
  * @param {string} kalphabet - 번호판 중간에 위치한 한글 글자 (예: "가", "허", "외교")
