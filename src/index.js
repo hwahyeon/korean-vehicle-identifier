@@ -63,46 +63,32 @@ function analyzeLicensePlateUsage(kalphabet) {
 }
 
 function analyzeLicensePlateVehicleType(part1) {
-  let vehicleType = "알 수 없음";
-
-  if (part1.startsWith("0") && part1.length === 3) {
-    const part1Number = parseInt(part1, 10);
-    if (part1Number >= 1 && part1Number <= 27) {
-      return "건설기계"; // "001"에서 "027"까지 건설기계
-    }
-    // 여기서는 return을 사용하지 않음으로써 "028"에서 "099"까지의 처리가 누락됨을 방지
-  }
   const part1Number = parseInt(part1, 10);
-  if (!isNaN(part1Number)) {
-    if (part1Number >= 1 && part1Number <= 69) {
-      vehicleType = "승용차";
-    } else if (part1Number >= 70 && part1Number <= 79) {
-      vehicleType = "승합차";
-    } else if (part1Number >= 80 && part1Number <= 97) {
-      vehicleType = "화물차";
-    } else if (part1Number >= 98 && part1Number <= 99) {
-      vehicleType = "특수차";
-    } else if (part1Number >= 100 && part1Number <= 699) {
-      vehicleType = "승용차";
-    } else if (part1Number >= 700 && part1Number <= 799) {
-      vehicleType = "승합차";
-    } else if (part1Number >= 800 && part1Number <= 979) {
-      vehicleType = "화물차";
-    } else if (part1Number >= 980 && part1Number <= 997) {
-      vehicleType = "특수차";
-    } else if (part1Number >= 998 && part1Number <= 999) {
-      vehicleType = "긴급자동차";
-    }
-  }
-  return vehicleType;
-}
 
-function isConstructionVehicle(part1) {
-  if (part1.startsWith("0") && part1.length === 3) {
-    const part1Number = parseInt(part1, 10);
-    return part1Number >= 1 && part1Number <= 27;
+  if (isNaN(part1Number)) {
+    return "알 수 없음";
   }
-  return false;
+
+  if (
+    part1.startsWith("0") &&
+    part1.length === 3 &&
+    part1Number >= 1 &&
+    part1Number <= 27
+  ) {
+    return "건설기계";
+  }
+
+  if (part1Number >= 1 && part1Number <= 69) return "승용차";
+  if (part1Number >= 70 && part1Number <= 79) return "승합차";
+  if (part1Number >= 80 && part1Number <= 97) return "화물차";
+  if (part1Number >= 98 && part1Number <= 99) return "특수차";
+  if (part1Number >= 100 && part1Number <= 699) return "승용차";
+  if (part1Number >= 700 && part1Number <= 799) return "승합차";
+  if (part1Number >= 800 && part1Number <= 979) return "화물차";
+  if (part1Number >= 980 && part1Number <= 997) return "특수차";
+  if (part1Number >= 998 && part1Number <= 999) return "긴급자동차";
+
+  return "알 수 없음";
 }
 
 function analyzeVehicle(part1, part2) {
